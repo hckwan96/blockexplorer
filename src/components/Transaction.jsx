@@ -43,6 +43,15 @@ function Transaction() {
                         <div className="w-1/2 divide-y">
                             <TransactionInfoTitle title="Transaction Hash" />
                             <TransactionInfoTitle title="Block Number" />
+                            <>
+                            {
+                                'status' in txnInfo ? (
+                                    <TransactionInfoTitle title="Status" />
+                                ) : (
+                                    <></>
+                                )
+                               }
+                            </>
                             <TransactionInfoTitle title="Time Stamp" />
                             <TransactionInfoTitle title="Block Hash" />
                             <TransactionInfoTitle title="From" />
@@ -67,6 +76,26 @@ function Transaction() {
                                     {txnInfo.confirmations} Block Confirmations
                                 </span>
                             </p>
+                            <>
+                            {
+                                'status' in txnInfo ?
+                                (
+                                    <>
+                                        <p className="py-3">
+                                            {
+                                                txnInfo.status ? (
+                                                    <span className="text-green-600">Success</span>
+                                                )
+                                                : (
+                                                    <span className="text-red-600">Failed</span>
+                                                )
+                                            }
+                                        </p>
+                                    </>
+                                )
+                                :<></>
+                            }
+                            </>
                             <p className="py-3">
                                 {formatTimeAgo(blockInfo.timestamp)} ago ({formatTimestamp(blockInfo.timestamp)})
                             </p>
